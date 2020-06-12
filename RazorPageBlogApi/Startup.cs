@@ -23,6 +23,8 @@ namespace RazorPageBlogApi
         {
             services.AddControllers();
 
+            services.AddHealthChecks();
+
             services.AddDbContext<RazorPageBlogDbContext>(
                 options =>
                     options.UseSqlServer(
@@ -48,6 +50,7 @@ namespace RazorPageBlogApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

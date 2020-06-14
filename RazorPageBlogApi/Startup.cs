@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RazorPageBlogApi.Data;
@@ -26,13 +27,20 @@ namespace RazorPageBlogApi
         {
             services.AddControllers();
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddSqlServer(
+                    connectionString: Configuration["ConnectionStrings:DefaultConnection"],
+                    healthQuery: "select 1",
+                    name: "MSSQL Check",
+                    failureStatus: HealthStatus.Degraded,
+                    tags: new string[] { "database", "sqlServer" });
 
             services.AddDbContext<RazorPageBlogDbContext>(
                 options =>
                     options.UseSqlServer(
                         Configuration
                             .GetConnectionString("DefaultConnection")));
+
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 

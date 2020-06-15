@@ -10,6 +10,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RazorPageBlogApi.Data;
+using RazorPageBlogApi.HealthCheck;
 
 namespace RazorPageBlogApi
 {
@@ -33,7 +34,8 @@ namespace RazorPageBlogApi
                     healthQuery: "select 1",
                     name: "MSSQL Check",
                     failureStatus: HealthStatus.Degraded,
-                    tags: new string[] { "database", "sqlServer" });
+                    tags: new string[] { "database", "sqlServer" })
+                .AddCheck<MemoryHealthCheck>("Memory Health Check");
 
             services.AddDbContext<RazorPageBlogDbContext>(
                 options =>

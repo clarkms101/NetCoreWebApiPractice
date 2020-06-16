@@ -45,7 +45,7 @@ namespace RazorPageBlogApi.Model
                 .ToList();
             foreach (var item in tagCloud)
             {
-                context.TagCloud.Add(new TagCloud
+                context.TagClouds.Add(new TagCloud
                 {
                     Id = Guid.NewGuid(),
                     Name = item.Key,

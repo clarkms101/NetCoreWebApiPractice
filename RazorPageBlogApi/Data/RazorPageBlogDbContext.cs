@@ -10,7 +10,7 @@ namespace RazorPageBlogApi.Data
         }
 
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<TagCloud> TagCloud { get; set; }
+        public virtual DbSet<TagCloud> TagClouds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

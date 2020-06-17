@@ -14,8 +14,15 @@ namespace RazorPageBlogApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Article>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
-            modelBuilder.Entity<TagCloud>(entity => { entity.Property(e => e.Id).ValueGeneratedNever(); });
+            modelBuilder.Entity<Article>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+            modelBuilder.Entity<TagCloud>(entity =>
+            {
+                entity.ToTable("TagCloud");
+                entity.Property(e => e.Id).ValueGeneratedNever();
+            });
         }
     }
 }

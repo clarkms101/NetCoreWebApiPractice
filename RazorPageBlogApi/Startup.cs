@@ -60,12 +60,6 @@ namespace RazorPageBlogApi
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                //endpoints.MapHealthChecks("/health");
-            });
-
             app.UseHealthChecks("/health", new HealthCheckOptions
             {
                 ResponseWriter = async (context, report) =>
@@ -74,6 +68,11 @@ namespace RazorPageBlogApi
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(json);
                 }
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
             });
         }
     }

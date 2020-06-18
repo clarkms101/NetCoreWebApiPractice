@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RazorPageBlogApi.Controllers
+namespace RazorPageBlogApi.Controllers.V2
 {
     [ApiController]
-    [Route("[controller]")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class TagCloudsController : ControllerBase
     {
         private readonly RazorPageBlogDbContext _blogDb;

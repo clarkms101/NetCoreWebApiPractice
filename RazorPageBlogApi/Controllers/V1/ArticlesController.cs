@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using RazorPageBlogApi.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using RazorPageBlogApi.Data;
 
-namespace RazorPageBlogApi.Controllers
+namespace RazorPageBlogApi.Controllers.V1
 {
     [ApiController]
-    [Route("[controller]")]
+    [ApiVersion("1.0", Deprecated = true)] // 將棄用的版本
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ArticlesController : ControllerBase
     {
         private readonly RazorPageBlogDbContext _blogDb;

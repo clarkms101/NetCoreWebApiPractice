@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,13 @@ namespace RazorPageBlogApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0); // asp.net core的版本
+            services.AddApiVersioning(o => {
+                o.ReportApiVersions = true; // 讓Client端可以看到目前有支援的版本號清單
+                o.AssumeDefaultVersionWhenUnspecified = true; // 在未指定版本時,給預設版本
+                o.DefaultApiVersion = new ApiVersion(1, 0); // 預設版本
+            });
+
             services.AddControllers();
 
             services.AddHealthChecks()

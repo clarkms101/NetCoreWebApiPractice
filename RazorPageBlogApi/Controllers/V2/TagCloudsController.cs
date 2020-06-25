@@ -18,12 +18,21 @@ namespace RazorPageBlogApi.Controllers.V2
             this._blogDb = blogDb;
         }
 
+        /// <summary>
+        /// 取得所有的Tag
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<TagCloud> Get()
         {
             return _blogDb.TagClouds.ToList();
         }
 
+        /// <summary>
+        /// 取得指定的Tag
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id:guid}")]
         [HttpGet]
         public TagCloud Get(Guid id)

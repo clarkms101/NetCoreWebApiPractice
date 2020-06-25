@@ -18,12 +18,21 @@ namespace RazorPageBlogApi.Controllers.V2
             this._blogDb = blogDb;
         }
 
+        /// <summary>
+        /// 取得所有的文章
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Article> Get()
         {
             return _blogDb.Articles.ToList();
         }
 
+        /// <summary>
+        /// 取得指定的文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("{id:guid}")]
         [HttpGet]
         public Article Get(Guid id)

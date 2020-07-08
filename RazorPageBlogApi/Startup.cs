@@ -44,19 +44,27 @@ namespace RazorPageBlogApi
             services.AddControllers();
 
             services.AddHealthChecks()
-                .AddSqlServer(
-                    connectionString: Configuration["ConnectionStrings:DefaultConnection"],
-                    healthQuery: "select 1",
-                    name: "MSSQL Check",
-                    failureStatus: HealthStatus.Degraded,
-                    tags: new string[] { "database", "sqlServer" })
+                //.AddSqlServer(
+                //    connectionString: Configuration["ConnectionStrings:MsSqlDefaultConnection"],
+                //    healthQuery: "select 1",
+                //    name: "MSSQL Check",
+                //    failureStatus: HealthStatus.Degraded,
+                //    tags: new string[] { "database", "sqlServer" })
                 .AddCheck<MemoryHealthCheck>("Memory Health Check");
 
+            // SQL Sever
+            //services.AddDbContext<RazorPageBlogDbContext>(
+            //    options =>
+            //        options.UseSqlServer(
+            //            Configuration
+            //                .GetConnectionString("MsSqlDefaultConnection")));
+
+            // Postgres
             services.AddDbContext<RazorPageBlogDbContext>(
                 options =>
-                    options.UseSqlServer(
+                    options.UseNpgsql(
                         Configuration
-                            .GetConnectionString("DefaultConnection")));
+                            .GetConnectionString("PostgresDefaultConnection")));
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
